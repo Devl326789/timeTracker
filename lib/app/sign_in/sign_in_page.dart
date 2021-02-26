@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var scaffold = Scaffold(
+    return Scaffold(
       appBar: AppBar(
         actions: [],
         title: Text('Time Tracker'),
         elevation: 2.0,
       ),
-      body: buildContainer(),
+      body: _buildContainer(),
     );
-    return scaffold;
   }
 
-  Widget buildContainer() {
+  Widget _buildContainer() {
     return Container(
       color: Colors.yellow,
       child: Column(
