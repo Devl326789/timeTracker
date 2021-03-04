@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../widgets/custom_raised_button.dart';
 
 class SignInPage extends StatelessWidget {
   @override
@@ -32,8 +33,7 @@ class SignInPage extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          RaisedButton(
-            onPressed: () {},
+          CustomRaisedButton(
             child: Text(
               'Sign in with Google',
               style: TextStyle(
@@ -42,7 +42,9 @@ class SignInPage extends StatelessWidget {
               ),
             ),
             color: Colors.white,
-          )
+            borderRadius: 4,
+            onPressed: () {},
+          ),
         ],
       ),
     );
