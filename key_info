@@ -1,0 +1,19 @@
+lias name: androiddebugkey
+Creation date: Dec 29, 2020
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: C=US, O=Android, CN=Android Debug
+Issuer: C=US, O=Android, CN=Android Debug
+Serial number: 1
+Valid from: Tue Dec 29 18:47:03 PST 2020 until: Thu Dec 22 18:47:03 PST 2050
+Certificate fingerprints:
+	 SHA1: 0A:60:12:F8:32:38:FF:F2:B1:C8:BE:4C:83:1E:44:8C:7C:57:D8:0A
+	 SHA256: AB:22:30:2E:DA:12:FF:1A:5C:F6:FE:CE:F2:EC:C5:4D:1A:E0:46:60:97:4B:5F:F6:7F:78:D4:0C:F2:1F:B1:EA
+Signature algorithm name: SHA1withRSA (weak)
+Subject Public Key Algorithm: 2048-bit RSA key
+Version: 1
+
+Warning:
+The certificate uses the SHA1withRSA signature algorithm which is considered a security risk. This algorithm will be disabled in a future update.
+The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using "keytool -importkeystore -srckeystore /home/ubuntu/.android/debug.keystore -destkeystore /home/ubuntu/.android/debug.keystore -deststoretype pkcs12".
