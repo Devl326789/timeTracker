@@ -76,7 +76,7 @@ class SignInPage extends StatelessWidget {
             text: 'Go Anonymous',
             textColor: Colors.black,
             color: Colors.lime[300],
-            onPressed: () => _signInAnonymously(),
+            onPressed: _signInAnonymously,
           ),
         ],
       ),
