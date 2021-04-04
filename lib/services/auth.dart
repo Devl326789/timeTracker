@@ -2,12 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthBase {
   User get currentUser;
+  Stream<User> authStateChanges();
   Future<User> signInAnonymously();
   Future<void> signOut();
 }
 
 class Auth implements AuthBase {
   final _fireBaseAuth = FirebaseAuth.instance;
+
+  @override
+  Stream<User> authStateChanges() => _fireBaseAuth.authStateChanges();
 
   @override
   User get currentUser => _fireBaseAuth.currentUser;
