@@ -46,22 +46,28 @@ class SignInPage extends StatelessWidget {
           SizedBox(
             height: 48,
           ),
-          SizedBox(height: 8.0),
-          SocialSignInButton(
-            assetName: 'images/google-logo.png',
-            text: 'Sign in with Google',
-            textColor: Colors.black87,
-            color: Colors.white,
-            onPressed: () {},
-          ),
-          SizedBox(height: 8.0),
-          SocialSignInButton(
-            assetName: 'images/facebook-logo.png',
-            text: 'Sign in with Facebook',
-            textColor: Colors.white,
-            color: Color(0xFF334D92),
-            onPressed: () {},
-          ),
+          // ###
+          // ####
+          // I'll leave this as an example of using the using Opacity widget
+          // to make things aling, but I don't like these services.
+          //
+          //
+          // SizedBox(height: 8.0),
+          // SocialSignInButton(
+          //   assetName: 'images/google-logo.png',
+          //   text: 'Sign in with Google',
+          //   textColor: Colors.black87,
+          //   color: Colors.white,
+          //   onPressed: () {},
+          // ),
+          // SizedBox(height: 8.0),
+          // SocialSignInButton(
+          //   assetName: 'images/facebook-logo.png',
+          //   text: 'Sign in with Facebook',
+          //   textColor: Colors.white,
+          //   color: Color(0xFF334D92),
+          //   onPressed: () {},
+          // ),
           SizedBox(height: 8.0),
           SignInButton(
             text: 'Sign in with email',
