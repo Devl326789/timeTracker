@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timeTracker/app/sign_in/social_signin_button.dart';
+//import 'package:timeTracker/app/sign_in/social_signin_button.dart';
 import './sign_in_button.dart';
 import '../../services/auth.dart';
 
@@ -9,7 +9,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously() async {
     try {
-      final user = await auth.signInAnonymously();
+      await auth.signInAnonymously();
     } catch (e) {
       print(e.toString());
     }
