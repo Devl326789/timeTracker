@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:timeTracker/services/auth.dart';
 import 'package:timeTracker/widgets/form_submit_button.dart';
 
@@ -15,12 +16,29 @@ class EmailSignInForm extends StatefulWidget {
 class _EmailSignInFormState extends State<EmailSignInForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
+  String get _email => _emailController.text;
+  String get _password => _passwordController.text;
 
   EmailSignInFormType _formType = EmailSignInFormType.signIn;
 
-  void _submit() {
-    print(
-        "email: ${_emailController.text}, Password: ${_passwordController.text}");
+  void _submit() async {
+    try {
+      if (_formType == EmailSignInFormType.signIn) {
+        await widget.auth.signInWithEmailAndPassword(_email, _password);
+      } else {
+        await widget.auth.createEmailAndPassword(_email, _password);
+      }
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void _emailEditingComplete() {
+    FocusScope.of(context).requestFocus(_passwordFocusNode);
   }
 
   void _toggleFormType() {
@@ -41,21 +59,9 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         ? 'Need an account? Register'
         : 'Have an account? Sign in';
     return [
-      TextField(
-        controller: _emailController,
-        decoration: InputDecoration(
-          hintText: 'Test@test.com',
-          labelText: 'Email',
-        ),
-      ),
+      _buildEmailTextField(),
       SizedBox(height: 8.0),
-      TextField(
-        controller: _passwordController,
-        autocorrect: false,
-        keyboardType: TextInputType.visiblePassword,
-        obscureText: true,
-        decoration: InputDecoration(labelText: 'Password'),
-      ),
+      _buildPasswordTextField(),
       SizedBox(height: 8.0),
       FormSubmitButton(
         text: primaryText,
@@ -67,6 +73,34 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         child: Text(secondaryText),
       )
     ];
+  }
+
+  TextField _buildPasswordTextField() {
+    return TextField(
+      controller: _passwordController,
+      focusNode: _passwordFocusNode,
+      autocorrect: false,
+      keyboardType: TextInputType.visiblePassword,
+      obscureText: true,
+      decoration: InputDecoration(labelText: 'Password'),
+      textInputAction: TextInputAction.done,
+      onEditingComplete: _submit,
+    );
+  }
+
+  TextField _buildEmailTextField() {
+    return TextField(
+      controller: _emailController,
+      focusNode: _emailFocusNode,
+      decoration: InputDecoration(
+        hintText: 'Test@test.com',
+        labelText: 'Email',
+      ),
+      autocorrect: false,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+      onEditingComplete: _emailEditingComplete,
+    );
   }
 
   @override
