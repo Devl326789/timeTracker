@@ -25,10 +25,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
   EmailSignInFormType _formType = EmailSignInFormType.signIn;
   bool _submitted = false;
+  bool _isLoading = false;
 
   void _submit() async {
     setState(() {
       _submitted = true;
+      _isLoading = true;
     });
     try {
       if (_formType == EmailSignInFormType.signIn) {
@@ -39,6 +41,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       Navigator.of(context).pop();
     } catch (e) {
       print(e.toString());
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -48,6 +54,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
   void _toggleFormType() {
     setState(() {
+      _submitted = false;
       _formType = _formType == EmailSignInFormType.signIn
           ? EmailSignInFormType.register
           : EmailSignInFormType.signIn;
@@ -65,7 +72,8 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         : 'Have an account? Sign in';
 
     bool submitEnabled = widget.emailValidator.isValid(_email) &&
-        widget.passwordValidator.isValid(_password);
+        widget.passwordValidator.isValid(_password) &&
+        !_isLoading;
 
     return [
       _buildEmailTextField(),
@@ -78,7 +86,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       ),
       SizedBox(height: 8.0),
       TextButton(
-        onPressed: _toggleFormType,
+        onPressed: !_isLoading ? _toggleFormType : null,
         child: Text(secondaryText),
       )
     ];
@@ -96,6 +104,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       obscureText: true,
       decoration: InputDecoration(
         labelText: 'Password',
+        enabled: _isLoading == false,
         errorText: showErrorText ? widget.invalidPasswordText : null,
       ),
       textInputAction: TextInputAction.done,
@@ -112,6 +121,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       decoration: InputDecoration(
         hintText: 'Test@test.com',
         labelText: 'Email',
+        enabled: _isLoading == false,
         errorText: showErrorText ? widget.invalidEmailErrorText : null,
       ),
       autocorrect: false,
