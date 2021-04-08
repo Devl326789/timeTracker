@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:timeTracker/app/sign_in/email_signin_page.dart';
+import 'package:timeTracker/services/auth_provider.dart';
 //import 'package:timeTracker/app/sign_in/social_signin_button.dart';
 import './sign_in_button.dart';
-import '../../services/auth.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key key, @required this.auth}) : super(key: key);
-  final AuthBase auth;
-
-  Future<void> _signInAnonymously() async {
+  Future<void> _signInAnonymously(BuildContext context) async {
+    final auth = AuthProvider.of(context);
     try {
       await auth.signInAnonymously();
     } catch (e) {
@@ -17,9 +15,10 @@ class SignInPage extends StatelessWidget {
   }
 
   void _signInWithEmail(BuildContext context) {
+    final auth = AuthProvider.of(context);
     Navigator.of(context).push(MaterialPageRoute<void>(
       fullscreenDialog: true,
-      builder: (context) => EmailSignInPage(auth: auth),
+      builder: (context) => EmailSignInPage(),
     ));
   }
 
@@ -96,7 +95,7 @@ class SignInPage extends StatelessWidget {
             text: 'Go Anonymous',
             textColor: Colors.black,
             color: Colors.lime[300],
-            onPressed: _signInAnonymously,
+            onPressed: () => _signInAnonymously(context),
           ),
         ],
       ),

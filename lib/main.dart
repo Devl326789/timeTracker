@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        home: LandingPage(
-          auth: Auth(),
-        ),
+        home: LandingPage(),
       ),
     );
   }
