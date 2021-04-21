@@ -9,8 +9,7 @@ import 'package:timeTracker/services/auth.dart';
 import 'package:timeTracker/widgets/form_submit_button.dart';
 import 'package:timeTracker/widgets/show_alert_dialog.dart';
 import 'package:timeTracker/widgets/show_exception_alert.dart';
-
-enum EmailSignInFormType { signIn, register }
+import './email_sign_in_model.dart';
 
 class EmailSignInFormStateful extends StatefulWidget
     with EmailAndPasswordValidators {
